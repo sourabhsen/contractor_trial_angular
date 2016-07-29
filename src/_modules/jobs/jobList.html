@@ -1,0 +1,59 @@
+<div layout>
+    <link rel="stylesheet" href="src/_modules/jobs/jobList.css"/>
+</div>
+<div layout flex-grow="1" layout-align="stretch">
+    <md-card flex-grow="1" layout="column">
+        <md-toolbar class="md-table-toolbar md-default">
+            <div class="md-toolbar-tools">
+                <md-icon class="material-icons">search</md-icon>
+                <form flex="" name="filter.form" class="ng-valid flex ng-valid-parse ng-pristine" _lpchecked="1">
+                    <input type="text"  placeholder="search" class="ng-valid ng-valid-parse ng-touched ng-pristine" aria-invalid="false">
+                </form>
+            </div>
+        </md-toolbar>
+        <br/>
+        <md-virtual-repeat-container id="vertical-container" flex-grow="1">
+            <md-table-container>
+                <table md-table  ng-model="selected" md-progress="promise">
+                    <thead md-head md-order="query.order">
+                    <tr md-row class="table-header">
+                        <th md-column style="padding:0px 5px 0px 0px;">
+                            <md-icon class="material-icons">
+                                <md-tooltip md-direction="right">
+                                    Hot jobs will be marked with a red flame
+                                </md-tooltip>
+                                whatshot
+                            </md-icon>
+                        </th>
+                        <th md-column md-order-by="projectid">Job ID</th>
+                        <th md-column md-order-by="name">Job Name</th>
+                        <th md-column md-order-by="source">Source</th>
+                        <th md-column md-order-by="status">Status</th>
+                        <th md-column md-order-by="facility_state">State</th>
+                        <th md-column md-order-by="created_at">Date Added</th>
+                        <th md-column md-order-by="hourly">Hourly</th>
+                    </tr>
+                    </thead>
+                    <tbody md-body>
+                    <!-- ADD TR TAGS HERE... See https://github.com/daniel-nagy/md-data-table for data table reference -->
+                     <tr md-row ng-repeat="item in list" ng-click="showDetails(item,'click')">
+                        <td md-cell></td>
+                        <td md-cell>{{item.id}}</td>
+                        <td md-cell>{{item.name}}</td>
+                        <td md-cell>{{item.name}}</td>
+                        <td md-cell>{{item.source}}</td>
+                        <td md-cell>{{item.status}}</td>
+                        <td md-cell>{{item.created_at | date :  "dd.MM.y"}}</td>
+                        <td md-cell>{{item.hourly}}</td>
+                        
+                    </tr>
+                    </tbody>
+                </table>
+            </md-table-container>
+        </md-virtual-repeat-container>
+               
+ <md-table-pagination md-limit="15" md-limit-options="[5, 10, 15]" md-page="query.page" md-total="{{item.length}}" 
+ md-on-paginate="" md-page-select></md-table-pagination>         
+
+    </md-card>
+</div>

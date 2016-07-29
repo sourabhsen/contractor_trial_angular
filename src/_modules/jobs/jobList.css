@@ -1,0 +1,18 @@
+.repeated-item {
+  border-bottom : 1px solid #ddd;
+  box-sizing    : border-box;
+  height        : 40px;
+  padding-top   : 10px;
+}
+
+.todo-item {
+  position: relative;
+  padding: 16px;
+  border-bottom: 1px solid rgba(0,0,0,.08);
+  text-transform: none;
+  cursor: pointer;
+}
+
+.md-button.md-raised{
+  color:#000;
+}

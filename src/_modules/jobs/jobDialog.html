@@ -1,0 +1,78 @@
+<md-dialog aria-label="" ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>{{job.name}}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon>close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div  layout="column" layout-padding ng-cloak>
+                    <br/>
+
+                    <div layout="column" ng-cloak>
+                        <md-content layout-padding>
+                            <form name="editJobForms">
+                            <md-input-container class="md-block">
+                                <label>Description</label>
+                                <input md-maxlength="30" required md-no-asterisk name="description" ng-model="description">
+                                <div ng-messages="editJobForm.description.$error">
+                                <div ng-message="required">This is required.</div>
+                               
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Client Name</label>
+                                <input required name="clientName" ng-model="clientName">
+                                <div ng-messages="editJobForm.clientName.$error">
+                                <div ng-message="required">This is required.</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Client Email</label>
+                                <input required type="email" name="clientEmail" ng-model="clientEmail"
+                                    minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
+                                <div ng-messages="editJobForm.clientEmail.$error" role="alert">
+                                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                    Your email must be between 10 and 100 characters long and look like an e-mail address.
+                                </div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Hourly Rate (USD)</label>
+                                <input required type="number" step="any" name="rate" ng-model="rate" min="800"
+                                    max="4999" ng-pattern="/^1234$/" />
+                                <div ng-messages="editJobForm.rate.$error" multiple md-auto-hide="false">
+                                <div ng-message="required">
+                                    You've got to charge something! You can't just <b>give away</b> a Missile Defense
+                                    System.
+                                </div>
+                                </div>
+                            </md-input-container>
+                            
+                             
+                                    <div class="md-actions" layout="row"> <span flex=""></span>
+                                                <button class="md-button md-raised">
+                                                     <span class="ng-scope"> Cancel </span>
+                                                    <div class="md-ripple-container"></div>
+                                                </button>
+                                                <button class="md-primary md-button"   tabindex="0">
+                                                    <span class="ng-scope"> Save </span>
+                                                     <div class="md-ripple-container"></div>
+                                                </button>
+                                    </div>
+
+                             
+                            </form>
+                        </md-content>
+                   </div>
+                   
+                 </div>
+            </div>
+        </md-dialog-content>
+
+</md-dialog>

@@ -17,7 +17,30 @@
                 }, function (httpError) {
                     throw httpError.status + " : " + httpError.data;
                 });
-            }
+            },
+
+            postJobProfile: function (dataObj,jobid) {
+                if (dataObj) {
+                    return $http.put(urls.appBaseUrl + endpoints.listingJob +'/' + jobid, dataObj)
+                        .then(function (response) {
+                            return response.data;
+                        }, function (httpError) {
+                            throw httpError.status + " : " + httpError.data;
+                        });
+                }
+            },
+
+            addJob: function (dataObj,jobid) {
+                if (dataObj) {
+                    return $http.post(urls.appBaseUrl + endpoints.listingJob , dataObj)
+                        .then(function (response) {
+                            return response.data;
+                        }, function (httpError) {
+                            throw httpError.status + " : " + httpError.data;
+                        });
+                }
+            },
+
         };
     }
 })();

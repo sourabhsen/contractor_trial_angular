@@ -1,21 +1,39 @@
 <div layout>
     <link rel="stylesheet" href="src/_modules/jobs/jobList.css"/>
 </div>
-<div layout flex-grow="1" layout-align="stretch">
-    <md-card flex-grow="1" layout="column">
-        <md-toolbar class="md-table-toolbar md-default">
-            <div class="md-toolbar-tools">
-                <md-icon class="material-icons">search</md-icon>
-                <form flex="" name="filter.form" class="ng-valid flex ng-valid-parse ng-pristine" _lpchecked="1">
-                    <input type="text"  placeholder="search" class="ng-valid ng-valid-parse ng-touched ng-pristine" aria-invalid="false">
-                </form>
-            </div>
+<div>
+    <md-card>
+       
+        <md-toolbar class="md-table-toolbar md-default" ng-hide="selected.length || filter.show">
+          <div class="md-toolbar-tools">
+            <h2 class="md-title">Jobs</h2>
+            <div flex></div>
+            <md-button class="md-icon-button" ng-click="filter.show = true">
+              <md-icon>filter_list</md-icon>
+            </md-button>
+             <md-button class="md-button md-primary" ng-click="addItem($event)">
+              ADD NEW JOB
+            </md-button>
+          </div>
         </md-toolbar>
+
+        <md-toolbar class="md-table-toolbar md-default" ng-show="filter.show && !selected.length">
+          <div class="md-toolbar-tools">
+            <md-icon>search</md-icon>
+            <form flex name="filter.form">
+              <input type="text" ng-model="query.filter" ng-model-options="filter.options" placeholder="search">
+            </form>
+            <md-button class="md-icon-button" ng-click="removeFilter()">
+              <md-icon>close</md-icon>
+            </md-button>
+          </div>
+        </md-toolbar>
+
         <br/>
-        <md-virtual-repeat-container id="vertical-container" flex-grow="1">
+        <div id="vertical-container">
             <md-table-container>
-                <table md-table  ng-model="selected" md-progress="promise">
-                    <thead md-head md-order="query.order">
+                <table md-table  multiple="{{options.multiSelect}}"  ng-model="selected" md-progress="promise">
+                    <thead md-head md-order="query.order" md-on-reorder="getJobs">
                     <tr md-row class="table-header">
                         <th md-column style="padding:0px 5px 0px 0px;">
                             <md-icon class="material-icons">
@@ -36,13 +54,13 @@
                     </thead>
                     <tbody md-body>
                     <!-- ADD TR TAGS HERE... See https://github.com/daniel-nagy/md-data-table for data table reference -->
-                     <tr md-row ng-repeat="item in list" ng-click="showDetails(item,'click')">
+                     <tr md-select="item" md-row ng-repeat="item in list | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit" ng-click="showDetails(item,'click')">
                         <td md-cell></td>
                         <td md-cell>{{item.id}}</td>
                         <td md-cell>{{item.name}}</td>
-                        <td md-cell>{{item.name}}</td>
                         <td md-cell>{{item.source}}</td>
                         <td md-cell>{{item.status}}</td>
+                        <td md-cell>{{item.state}}</td>
                         <td md-cell>{{item.created_at | date :  "dd.MM.y"}}</td>
                         <td md-cell>{{item.hourly}}</td>
                         
@@ -50,10 +68,11 @@
                     </tbody>
                 </table>
             </md-table-container>
-        </md-virtual-repeat-container>
+                 <md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{list.length}}" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="logPagination"></md-table-pagination>
+
+        </div>
                
- <md-table-pagination md-limit="15" md-limit-options="[5, 10, 15]" md-page="query.page" md-total="{{item.length}}" 
- md-on-paginate="" md-page-select></md-table-pagination>         
+        
 
     </md-card>
 </div>

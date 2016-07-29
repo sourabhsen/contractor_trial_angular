@@ -1,7 +1,7 @@
 <md-dialog aria-label="" ng-cloak>
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <h2>{{job.name}}</h2>
+                <h2>Add Job</h2>
                 <span flex></span>
                 <md-button class="md-icon-button" ng-click="cancel()">
                     <md-icon>close</md-icon>
@@ -16,11 +16,11 @@
 
                     <div layout="column" ng-cloak>
                         <md-content layout-padding>
-                            <form name="editJobForms">
+                            <form name="addJobForms">
                             <md-input-container class="md-block">
                                 <label>Description</label>
                                 <input md-maxlength="30" required md-no-asterisk name="description" ng-model="description">
-                                <div ng-messages="editJobForm.description.$error">
+                                <div ng-messages="addJobForms.description.$error">
                                 <div ng-message="required">This is required.</div>
                                
                                 </div>
@@ -28,7 +28,7 @@
                             <md-input-container class="md-block">
                                 <label>Client Name</label>
                                 <input required name="clientName" ng-model="clientName">
-                                <div ng-messages="editJobForm.clientName.$error">
+                                <div ng-messages="addJobForms.clientName.$error">
                                 <div ng-message="required">This is required.</div>
                                 </div>
                             </md-input-container>
@@ -36,7 +36,7 @@
                                 <label>Client Email</label>
                                 <input required type="email" name="clientEmail" ng-model="clientEmail"
                                     minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
-                                <div ng-messages="editJobForm.clientEmail.$error" role="alert">
+                                <div ng-messages="addJobForms.clientEmail.$error" role="alert">
                                 <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
                                     Your email must be between 10 and 100 characters long and look like an e-mail address.
                                 </div>
@@ -45,7 +45,7 @@
                             <md-input-container class="md-block">
                                 <label>Hourly Rate (USD)</label>
                                 <input required type="number" step="any" name="rate" ng-model="rate"  />
-                                <div ng-messages="editJobForm.rate.$error" multiple md-auto-hide="false">
+                                <div ng-messages="addJobForms.rate.$error" multiple md-auto-hide="false">
                                
                                 </div>
                             </md-input-container>
@@ -57,7 +57,7 @@
                                             <div class="md-ripple-container"></div>
                                         </button>
                                         <button class="md-primary md-button" tabindex="0" 
-                                         ng-click="editFormSave(true)">
+                                         ng-click="addFormSave(true)">
                                             <span class="ng-scope"> Save</span>
                                              <div class="md-ripple-container"></div>
                                         </button>
